@@ -1,5 +1,6 @@
 package br.unb.cic.poo.gol;
 
+import com.google.inject.Inject;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class GameEngine {
 	 *            dimensao vertical do ambiente
 	 * @param width
 	 *            dimentsao horizontal do ambiente
+         * @param statistics
 	 */
 	public GameEngine(int height, int width, Statistics statistics) {
 		this.height = height;
@@ -46,8 +48,9 @@ public class GameEngine {
 		this.statistics = statistics;
 	}
 	
-	public void setEstrategia(EstrategiaDeDerivacao e) {
-		estrategia = e;
+        @Inject
+	public void setEstrategia(EstrategiaDeDerivacao estrategia) {
+		this.estrategia = estrategia;
 	}
 
 	public EstrategiaDeDerivacao getEstrategia() {
@@ -61,8 +64,8 @@ public class GameEngine {
 	 * geracao. 
 	 */
 	public void nextGeneration() {
-		List<Cell> mustRevive = new ArrayList<Cell>();
-		List<Cell> mustKill = new ArrayList<Cell>();
+		List<Cell> mustRevive = new ArrayList<>();
+		List<Cell> mustKill = new ArrayList<>();
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				if (estrategia.shouldRevive(i, j, this)) {
@@ -107,7 +110,7 @@ public class GameEngine {
 			statistics.recordRevive();
 		}
 		else {
-			new InvalidParameterException("Invalid position (" + i + ", " + j + ")" );
+                    throw new InvalidParameterException("Invalid position (" + i + ", " + j + ")" );
 		}
 	}
 	

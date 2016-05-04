@@ -3,17 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/estrategias/Conway.java</file>
-            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/estrategias/HighLife.java</file>
-            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/GameController.java</file>
-            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/Main.java</file>
-            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/estrategias/LiveFreeOrDie.java</file>
-            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/EstrategiaDeDerivacao.java</file>
-            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/GameView.java</file>
-            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/Statistics.java</file>
-            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/estrategias/IConway.java</file>
             <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/Cell.java</file>
+            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/EstrategiaDeDerivacao.java</file>
+            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/GameController.java</file>
             <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/GameEngine.java</file>
+            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/estrategias/LiveFreeOrDie.java</file>
+            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/estrategias/HighLife.java</file>
+            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/Statistics.java</file>
+            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/Main.java</file>
+            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/GameView.java</file>
+            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/estrategias/Conway.java</file>
         </group>
     </open-files>
 </project-private>

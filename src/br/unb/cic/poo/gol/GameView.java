@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 import br.unb.cic.poo.gol.estrategias.Conway;
 import br.unb.cic.poo.gol.estrategias.HighLife;
+import br.unb.cic.poo.gol.estrategias.LiveFreeOrDie;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * Atua como um componente de apresentacao (view), exibindo o estado atual do
@@ -21,13 +24,16 @@ public class GameView {
 	private static final int NEXT_GENERATION = 2;
 	private static final int CONWAY = 3;
 	private static final int HIGH_LIFE = 4; 
-	private static final int HALT = 5; 
+	private static final int LIVEFREEORDIE = 5;
+        private static final int HALT = 6; 
 
 	private GameEngine engine;
 	private GameController controller;
-
+        
 	/**
 	 * Construtor da classe GameBoard
+         * @param controller
+         * @param engine
 	 */
 	public GameView(GameController controller, GameEngine engine) {
 		this.controller = controller;
@@ -62,7 +68,8 @@ public class GameView {
 			System.out.println("[2] Next generation");
 			System.out.println("[3] Conway");
 			System.out.println("[4] High Life");
-			System.out.println("[5] Halt");
+			System.out.println("[5] Live Free or Die");
+                        System.out.println("[6] Halt");
 		
 			System.out.print("\n \n Option: ");
 			
@@ -74,6 +81,7 @@ public class GameView {
 			case NEXT_GENERATION : nextGeneration(); break;
 			case CONWAY : engine.setEstrategia(new Conway()); update(); break;
 			case HIGH_LIFE : engine.setEstrategia(new HighLife()); update();break;
+                        case LIVEFREEORDIE : engine.setEstrategia(new LiveFreeOrDie()); update();break;
 			case HALT : halt();
 		}
 	}
@@ -123,9 +131,13 @@ public class GameView {
 			return HIGH_LIFE;
 		}
 		else if(option.equals("5")) {
-			return HALT;
+			return LIVEFREEORDIE;
+                }
+                else if(option.equals("6")) {
+                        return HALT;
 		}
 		else return INVALID_OPTION;
+                
 	}
 
 	/* Imprime uma linha usada como separador das linhas do tabuleiro */

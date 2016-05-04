@@ -168,7 +168,7 @@ public class GameEngine {
                                     aux1 = a;
                                     aux2 = b;
                                     if(a == -1)
-                                        aux1 = height -1;
+                                        aux1 = height-1;
                                     if(b == -1)
                                         aux2 = width-1;
                                     if(a == height)

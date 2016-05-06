@@ -155,20 +155,22 @@ public class GameEngine {
 	 * Computa o numero de celulas vizinhas vivas, dada uma posicao no ambiente
 	 * de referencia identificada pelos argumentos (i,j).
 	 */
-	public int numberOfNeighborhoodAliveCells(int i, int j) {
+    public int numberOfNeighborhoodAliveCells(int i, int j) {
 		int alive = 0;
-                int aux1,aux2;
-                
+                int aux1;
+                int aux2;
+                //int inf;
 		for (int a = i - 1; a <= i + 1; a++) {
 			for (int b = j - 1; b <= j + 1; b++) {
-				if (validPosition(a, b)  && (!(a==i && b == j)) && cells[a][b].isAlive()) {
+				if (validPosition(a,b) && (!(a==i && b == j)) && cells[a][b].isAlive()) {
 					alive++;
-				}
+                                }
+                               
                                 else{
                                     aux1 = a;
                                     aux2 = b;
                                     if(a == -1)
-                                        aux1 = height-1;
+                                        aux1 = height -1;
                                     if(b == -1)
                                         aux2 = width-1;
                                     if(a == height)
@@ -179,8 +181,9 @@ public class GameEngine {
                                     if (validPosition(aux1,aux2) && (!(aux1==i && aux2 == j)) && cells[aux1][aux2].isAlive()) {
 					alive++;
                                     }
-                                    }
-			}
+                                    }       
+                    
+                        }
 		}
 		return alive;
 	}

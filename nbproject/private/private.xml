@@ -13,6 +13,8 @@
             <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/Main.java</file>
             <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/GameView.java</file>
             <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/estrategias/Conway.java</file>
+            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/estrategias/GameModule.java</file>
+            <file>file:/home/luan/NetBeansProjects/GameOfLife/src/br/unb/cic/poo/gol/FrameView.java</file>
         </group>
     </open-files>
 </project-private>

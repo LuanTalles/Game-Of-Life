@@ -5,8 +5,16 @@ import java.util.Scanner;
 import br.unb.cic.poo.gol.estrategias.Conway;
 import br.unb.cic.poo.gol.estrategias.HighLife;
 import br.unb.cic.poo.gol.estrategias.LiveFreeOrDie;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  * Atua como um componente de apresentacao (view), exibindo o estado atual do
@@ -14,7 +22,7 @@ import com.google.inject.Injector;
  * 
  * @author rbonifacio
  */
-public class GameView {
+public class GameView extends JFrame {
 	private static final String LINE = "+-----+";
 	private static final String DEAD_CELL = "|     |";
 	private static final String ALIVE_CELL = "|  o  |";
@@ -30,16 +38,192 @@ public class GameView {
 	private GameEngine engine;
 	private GameController controller;
         
+        private JOptionPane haltInformations;
+        private JButton halt;
+        private JPanel  cellArray;
+        private JButton[][] cells = new JButton[10][10];
+        private JComboBox implementations = new JComboBox();
+        private JButton nextGeneration;
+        
 	/**
 	 * Construtor da classe GameBoard
          * @param controller
          * @param engine
 	 */
 	public GameView(GameController controller, GameEngine engine) {
+                super("Game of Life"); 
+                
 		this.controller = controller;
 		this.engine = engine;
+                
+                this.setVisible(true);
+                
+                initComponents();
+     
 	}
+        
+        private void criaCelulas(){
+            for (JButton[] celula : cells) {
+                for (int j = 0; j < celula.length; j++) {
+                    celula[j] = new JButton("");
+                    cellArray.add(celula[j]);
+                    ActionListener actionListener = new ActionListener() {
+                        @Override
+                        public void actionPerformed( ActionEvent e ) {
+                            JButton novo;
 
+                            novo = (JButton) e.getSource();
+                            
+                            novo.setBackground(new java.awt.Color(1, 1, 1));
+                            
+                            for (int k = 0; k < engine.getHeight(); k++) {
+                                for (int l = 0; l < engine.getWidth(); l++) {
+                                    if(novo == cells[k][l])
+                                    {
+                                        controller.makeCellAlive(k, l);
+                                    }
+                                }
+                            }
+
+                        }
+
+                    };
+                    celula[j].addActionListener(actionListener);
+                }
+            }
+        }
+        
+        private void initComponents() {
+
+            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+            cellArray = new JPanel(new GridLayout(10,10));
+
+            criaCelulas();
+
+            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(cellArray);
+            jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 0, Short.MAX_VALUE)
+            );
+            jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 500, Short.MAX_VALUE)
+            );
+
+            halt = new JButton( "Halt" );
+            halt.setPreferredSize( new Dimension( 30, 30 ) );
+            halt.addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        HaltMouseClicked(evt);
+                    }
+                }
+            );
+            
+            nextGeneration = new JButton("Next Generation");
+            nextGeneration.addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        NextGenerationMouseClicked(evt);
+                    }
+                }
+            );
+
+            implementations.setName("Implementacoes"); // NOI18N
+            implementations.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Conway", "High Life", "Live Free or Die" }));
+            implementations.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                implementationsActionPerformed(evt);
+            }
+        });
+
+            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+            getContentPane().setLayout(layout);
+            layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(nextGeneration, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(103, 103, 103)
+                            .addComponent(implementations, 0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(85, 85, 85)
+                            .addComponent(halt, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cellArray, 0, 0, Short.MAX_VALUE))
+                    .addContainerGap())
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(cellArray, 500, 500, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(halt)
+                        .addComponent(nextGeneration)
+                        .addComponent(implementations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap())
+            );
+
+            pack();
+        }
+        
+        private void HaltMouseClicked(java.awt.event.MouseEvent evt) {                                  
+            JOptionPane.showMessageDialog(cellArray, "Statistics", "Statistics", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("icons/statistics.jpg"));
+            halt();
+        }
+        
+        private void NextGenerationMouseClicked(java.awt.event.MouseEvent evt) {                                  
+            JButton novo;
+
+            novo = (JButton) evt.getSource();
+            
+            if(novo == nextGeneration)
+            {
+//                JOptionPane.showMessageDialog(cellArray, "Informações sobre o game", "Halt", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("icons/halt"));
+                nextGeneration();
+                for (int k = 0; k < engine.getHeight(); k++) {
+                    for (int l = 0; l < engine.getWidth(); l++) {
+                        if(engine.isCellAlive(k, l))
+                        {
+                            cells[k][l].setBackground(new java.awt.Color(1, 1, 1));
+                        }
+                        else
+                        {   
+                            cells[k][l].setBackground(null);
+                        }
+                    }   
+                }
+            }
+            
+        }
+
+        private void implementationsActionPerformed(java.awt.event.ActionEvent evt) {                                                
+            JComboBox cb = (JComboBox)evt.getSource();
+            String implementacao = (String)cb.getSelectedItem();
+
+            if(implementacao.equals("High Life")) {
+//                 JOptionPane.showMessageDialog(cellArray, "High Life", "Halt", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("icons/halt"));      
+                engine.setEstrategia(new HighLife()); 
+//                update();
+            }
+            else if (implementacao.equals("Live Free or Die")) {
+//                 JOptionPane.showMessageDialog(cellArray, "Live Free or Die", "Halt", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("icons/halt"));   
+                engine.setEstrategia(new LiveFreeOrDie()); 
+//                update();
+            }
+            else 
+            {
+//                JOptionPane.showMessageDialog(cellArray, "Conway", "Halt", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("icons/halt"));
+                engine.setEstrategia(new Conway()); 
+//                update();
+            }
+//            JOptionPane.showMessageDialog(cellArray, engine.getEstrategia().getName(), "Halt", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("icons/halt"));
+
+        }
 	/**
 	 * Atualiza o componente view (representado pela classe GameBoard),
 	 * possivelmente como uma resposta a uma atualizacao do jogo.
@@ -54,7 +238,7 @@ public class GameView {
 			System.out.println("   " + i);
 			printLine();
 		}
-		printOptions();
+//		printOptions();
 	}
 
 	private void printOptions() {

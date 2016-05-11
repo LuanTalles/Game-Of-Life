@@ -172,8 +172,9 @@ public class GameView extends JFrame {
         }
         
         private void HaltMouseClicked(java.awt.event.MouseEvent evt) {                                  
-            JOptionPane.showMessageDialog(cellArray, "Statistics", "Statistics", JOptionPane.INFORMATION_MESSAGE,new ImageIcon("icons/statistics.jpg"));
-            halt();
+            controller.halt();
+                       
+            
         }
         
         private void NextGenerationMouseClicked(java.awt.event.MouseEvent evt) {                                  

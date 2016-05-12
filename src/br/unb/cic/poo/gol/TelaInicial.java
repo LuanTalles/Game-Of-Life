@@ -103,7 +103,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btnCreditosMouseClicked(java.awt.event.MouseEvent evt) {                                         
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Desenvolvedores: Luan Talles e Farlen Rhenir", "Sobre os desenvolvedores", HEIGHT);
+        JOptionPane.showMessageDialog(null, "Desenvolvedores:\n Luan Talles - 10/0111483\n Farlen Rhenir - 10/0010610", "Sobre os desenvolvedores", HEIGHT);
                 
     }                                        
 

@@ -7,6 +7,7 @@ import br.unb.cic.poo.gol.estrategias.HighLife;
 import br.unb.cic.poo.gol.estrategias.LiveFreeOrDie;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -94,7 +95,13 @@ public class GameView extends JFrame {
         }
         
         private void initComponents() {
-
+            	Toolkit kit = Toolkit.getDefaultToolkit();
+		Dimension tamanhoTela = kit.getScreenSize();
+		int width = tamanhoTela.width;
+		int height = tamanhoTela.height;
+		setLocation( width/4, height/8 );
+                //setVisible(false);
+            
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
             cellArray = new JPanel(new GridLayout(10,10));
